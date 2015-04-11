@@ -1,4 +1,9 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
+
+class ContentsController < ApplicationController
+
+end
+
 require 'rubygems'
 require 'sinatra'
 
