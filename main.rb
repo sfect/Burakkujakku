@@ -55,14 +55,14 @@ helpers do
     @play_again = true
     @show_hit_or_stay_buttons = false
     session[:player_pot] = session[:player_pot] + session[:player_bet]
-    @winner = "<strong>やりました！#{session[:player_name]}様の勝ちです！</strong>#{msg}"
+    @winner = "<strong>#{session[:player_name]}様の勝ちです！</strong>#{msg}"
   end
 
   def loser!(msg)
     @play_again = true
     @show_hit_or_stay_buttons = false
     session[:player_pot] = session[:player_pot] - session[:player_bet]
-    @loser = "<strong>あ、これはあかんやつや。#{session[:player_name]}様の負けです！はい解散！#{msg}"
+    @loser = "<strong>#{session[:player_name]}様の負けです！はい解散！#{msg}"
   end
 
   def tie!(msg)
