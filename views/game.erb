@@ -1,0 +1,66 @@
+<div id='game'>
+  <%if @loser %>
+      <div class="alert alert-error"><%=@loser%></div>
+    <% end %>
+    <%if @winner %>
+      <div class="alert alert-success"><%=@winner%></div>
+    <% end %>
+  <h1>BLACK JACK</h1> 
+
+  <h3>ようこそいらっしゃいました、<%= session[:player_name] %>様。</h3> 
+
+  <% if @play_again %>
+    <p>
+      <strong>もう一度プレイしますか？</strong>
+      <a href="/bet" class="btn btn-primary">はい</a>
+      <a href="/game_over" class="btn">いいえ</a>
+    </p>
+  <% end %> 
+
+  <div class="well" id='dealer_area'>
+    <h4>ディーラーのカード：</h4>
+      <% session[:dealer_cards].each_with_index do |card, i| %>
+        <% if session[:turn] != "dealer" && i == 0 %>
+          <img src="/images/cards/cover.jpg">
+        <% else %>
+        <%= card_image(card) %>
+        <% end %>
+      <% end %> 
+
+      <% if @show_dealer_hit_button %>
+        <p>
+          <h5>ディーラーの合計は<%= calculate_total(session[:dealer_cards])%>です。ディーラーはヒットします。</h5>
+          <form id='dealer_hits' action='/game/dealer/hit' method='post'>
+            <input type='submit' class='btn btn-primary' value='ディーラーのカードを見る'>
+          </form>
+        </p>
+      <% end %>
+  </div>  
+
+  <br/> 
+
+  <div class="well" id='player_area'>
+    <h4><%= session[:player_name] %>様のカード：</h4>
+      <% session[:player_cards].each do |card| %> 
+        <%= card_image(card) %>
+    <% end %>
+
+    <h4>
+      <%= session[:player_name] %>は全財産<%= session[:player_pot] %>円のうち<%= session[:player_bet] %>円を賭けています。
+    </h4>
+
+  </div>  
+
+  <p>
+    <%= session[:player_name] %>様の合計は<%= calculate_total(session[:player_cards]) %>です。どうしますか？ 
+
+  <% if @show_hit_or_stay_buttons %>
+    <form id="hit_form" action="/game/player/hit" method="post">
+      <input type="submit" class="btn btn-success" value="ヒット" />
+    </form>
+    <form id="stay_form"action="/game/player/stay" method="post">
+      <input type="submit" class="btn btn-warning" value="ステイ" />
+    </form>
+  <% end %>
+  </p>
+</div>

@@ -1,0 +1,7 @@
+<h3>賭け金を設定してください。</h3>
+<p><%= session[:player_name] %>様の所持金は<%= session[:player_pot].to_i %>円です。</p>
+<form action='/bet' method='post'>
+  <input type="text" name="bet_amount" />
+  <br/>
+  <input type="submit" value="賭ける" />
+</form>
