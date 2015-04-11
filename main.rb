@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'sinatra'
 
-set :sessions, true
+use Rack::Session::Cookie, :key => 'rack.session', :path => '/', :secret => 'burakkujakku'
 
 BLACKJACK_AMOUNT = 21
 DEALER_AMOUNT = 17
